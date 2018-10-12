@@ -1,22 +1,17 @@
 # Containers Volumes Load Tests
 
-## To use it on Docker
+## How to use it
 
-```bash
+### On OpenShift
 
-docker run -ti --rm \
-   -v  \
-   mariolet/volumes-perfs:latest
+3 different kinds of volumes will be tested:
 
-```
+1. **tmpfs** volume: in memory
+2. **emptyDir** volume: the filesystem node where the container is running
+3. **CoW**: internal container storage
+4. **Persistent**: whatever storage type the admin has configured (gluster, ceph, etc...)
 
-## To use it on OpenShift
-
-Start a pod that mounts 3 different kinds of volumes:
-
-1. A tmpsfs volume: in memory
-2. A emptyDir volume: the filesystem node where the container is running
-3. A persistent volume: whatever storage type the admin has configured (EBS, gluster, ceph, etc...)
+To start the pod with the tooling ([fio](https://github.com/axboe/fio)) and with the volumes mounted run the following command:
 
 ```bash
 
@@ -49,7 +44,7 @@ spec:
 
 ```
 
-Open a shell in the container and run [fio]():
+Once the pod is started, run [fio](https://github.com/axboe/fio) with the corresponding config files:
 
 ```bash
 
@@ -57,7 +52,7 @@ oc rsh volumes-perfs-pod /workdir/run_fio.sh
 
 ```
 
-## To build the image
+## How to build the image
 
 ```bash
 
@@ -66,6 +61,3 @@ cd volumese-perfs
 docker build -t volumes-perfs .
 
 ```
-
-14131567.524571
-14037695.917379
