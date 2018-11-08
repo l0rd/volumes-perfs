@@ -4,7 +4,7 @@
 
 ### On OpenShift
 
-3 different kinds of volumes will be tested:
+4 different kinds of filesystems will be tested:
 
 1. **tmpfs** volume: in memory
 2. **emptyDir** volume: the filesystem node where the container is running
